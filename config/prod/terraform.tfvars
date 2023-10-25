@@ -15,7 +15,6 @@ private_subnet_cidr_2 = "10.5.3.0/24"
 #private_subnet_cidr_7 = "10.5.8.0/24"
 #private_subnet_cidr_8 = "10.5.9.0/24"
 availability_zone_1 = "ap-southeast-6a"
-#availability_zone_2 = "ap-northeast-1c"
 
 
 // Back Office
