@@ -2,6 +2,10 @@ variable "env_name" {
     description = "Environment Name"
 }
 
+variable "project" {
+    description = "PROJECT NAME"
+}
+
 variable "region" {
     description = "REGION"
 }
@@ -29,3 +33,4 @@ variable "pub_a" {
 variable "az_a" {
     description = "AVAILABILITY ZONE"
 }
+
