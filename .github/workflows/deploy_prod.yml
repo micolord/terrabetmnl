@@ -62,8 +62,8 @@ jobs:
         id: init
         run: terraform init
         env:
-          ACCESSKEY_ID:  ${{ secrets.ACCESSKEY_ID }}
-          ACCESSKEY_SECRET:  ${{ secrets.ACCESSKEY_SECRET }}
+          ALICLOUD_ACCESS_KEY:  ${{ secrets.ALICLOUD_ACCESS_KEY }}
+          ALICLOUD_SECRET_KEY:  ${{ secrets.ALICLOUD_SECRET_KEY }}
 
       - name: Terraform Validate
         id: validate
@@ -85,7 +85,7 @@ jobs:
   #      iac_version: 'v14'
   #      policy_type: 'aws'
   #      only_warn: true
-  
+
         #sarif_upload: true
         #non_recursive:
         #iac_dir:
@@ -124,15 +124,15 @@ jobs:
         id: init
         run: terraform init
         env:
-          ACCESSKEY_ID:  ${{ secrets.ACCESSKEY_ID }}
-          ACCESSKEY_SECRET:  ${{ secrets.ACCESSKEY_SECRET }}
+          ALICLOUD_ACCESS_KEY:  ${{ secrets.ALICLOUD_ACCESS_KEY }}
+          ALICLOUD_SECRET_KEY:  ${{ secrets.ALICLOUD_SECRET_KEY }}
 
       - name: Terraform Plan
         id: plan
         run: terraform plan -var-file=config/dev/terraform.tfvars -out=dev-plan.out
         env:
-          ACCESSKEY_ID:  ${{ secrets.ACCESSKEY_ID }}
-          ACCESSKEY_SECRET:  ${{ secrets.ACCESSKEY_SECRET }}
+          ALICLOUD_ACCESS_KEY:  ${{ secrets.ALICLOUD_ACCESS_KEY }}
+          ALICLOUD_SECRET_KEY:  ${{ secrets.ALICLOUD_SECRET_KEY }}
 
       - uses: actions/upload-artifact@master
         with:
@@ -186,13 +186,13 @@ jobs:
         id: init
         run: terraform init
         env:
-          ACCESSKEY_ID:  ${{ secrets.ACCESSKEY_ID }}
-          ACCESSKEY_SECRET:  ${{ secrets.ACCESSKEY_SECRET }}
+          ALICLOUD_ACCESS_KEY:  ${{ secrets.ALICLOUD_ACCESS_KEY }}
+          ALICLOUD_SECRET_KEY:  ${{ secrets.ALICLOUD_SECRET_KEY }}
 
       - name: Terraform Apply
         id: apply
         run: terraform apply --auto-approve dev-plan.out
         env:
-          ACCESSKEY_ID:  ${{ secrets.ACCESSKEY_ID }}
-          ACCESSKEY_SECRET:  ${{ secrets.ACCESSKEY_SECRET }}
+          ALICLOUD_ACCESS_KEY:  ${{ secrets.ALICLOUD_ACCESS_KEY }}
+          ALICLOUD_SECRET_KEY:  ${{ secrets.ALICLOUD_SECRET_KEY }}
       
