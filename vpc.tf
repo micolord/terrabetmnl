@@ -17,3 +17,33 @@ module "vpc" {
     Environment  = var.env_name
   }
 }
+
+module "nat-gateway1" {
+  source = "terraform-alicloud-modules/nat-gateway/alicloud"
+  region = var.region
+
+  create = true
+  vpc_id = module.vpc.vpc_id
+  name   = "${var.env_name}-${var.project}-natgw1"
+  vswitch_id = module.vpc.vswitch_ids[1]
+
+  // Create eip and bind them with nat gateway
+  create_eip    = true
+  number_of_eip = 1
+  eip_name      = "${var.env_name}-${var.project}-eip1"
+}
+
+module "nat-gateway2" {
+  source = "terraform-alicloud-modules/nat-gateway/alicloud"
+  region = var.region
+
+  create = true
+  vpc_id = module.vpc.vpc_id
+  name   = "${var.env_name}-${var.project}-natgw2"
+  vswitch_id = module.vpc.vswitch_ids[2]
+
+  // Create eip and bind them with nat gateway
+  create_eip    = true
+  number_of_eip = 1
+  eip_name      = "${var.env_name}-${var.project}-eip2"
+}
