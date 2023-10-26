@@ -25,3 +25,16 @@ resource "alicloud_nat_gateway" "int_nat_gw1" {
   vswitch_id       = module.vpc.vswitch_ids[1]
   nat_type         = "Enhanced"
 }
+
+resource "alicloud_eip" "int_nat_eip1" {
+  bandwidth            = "10"
+  internet_charge_type = "PayByBandwidth"
+}
+
+resource "alicloud_eip_association" "int_nat_assoc1" {
+  allocation_id = alicloud_eip.int_nat_eip1.id
+  instance_type = "Nat"
+  instance_id   = alicloud_nat_gateway.int_nat_gw1.id
+
+
+}
