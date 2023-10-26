@@ -31,13 +31,12 @@ resource "alicloud_eip" "int_nat_eip1" {
   internet_charge_type = "PayByBandwidth"
 }
 
-resource "alicloud_eip" "snat_eip1" {
-  bandwidth            = "10"
-  internet_charge_type = "PayByBandwidth"
+resource "alicloud_eip_address" "eip_addr_snat1" {
+  address_name  = "${var.env_name}-${var.project}-eipaddr"
 }
 
 resource "alicloud_eip_association" "int_nat_assoc1" {
-  allocation_id = alicloud_eip.int_nat_eip1.id
+  allocation_id = alicloud_eip_address.eip_addr_snat1.id
   instance_type = "Nat"
   instance_id   = alicloud_nat_gateway.int_nat_gw1.id
 }
@@ -45,5 +44,5 @@ resource "alicloud_eip_association" "int_nat_assoc1" {
 resource "alicloud_snat_entry" "int_nat_snat1" {
   snat_table_id     = alicloud_nat_gateway.int_nat_gw1.snat_table_ids
   source_vswitch_id = module.vpc.vswitch_ids[1]
-  snat_ip           = alicloud_eip.snat_eip1.ip_address
+  snat_ip           = alicloud_eip_address.eip_addr_snat1.ip_address
 }
