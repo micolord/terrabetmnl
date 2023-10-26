@@ -20,19 +20,14 @@ module "vpc" {
 
 resource "alicloud_nat_gateway" "int_nat_gw1" {
   vpc_id           = module.vpc.vpc_id
-  nat_gateway_name = "${var.env_name}-${var.project}-ingw"
+  nat_gateway_name = "${var.env_name}-${var.project}-ingw1"
   payment_type     = "PayAsYouGo"
   vswitch_id       = module.vpc.vswitch_ids[1]
   nat_type         = "Enhanced"
 }
 
-resource "alicloud_eip" "int_nat_eip1" {
-  bandwidth            = "10"
-  internet_charge_type = "PayByBandwidth"
-}
-
 resource "alicloud_eip_address" "eip_addr_snat1" {
-  address_name  = "${var.env_name}-${var.project}-eipaddr"
+  address_name  = "${var.env_name}-${var.project}-eipaddr1"
 }
 
 resource "alicloud_eip_association" "int_nat_assoc1" {
@@ -45,4 +40,29 @@ resource "alicloud_snat_entry" "int_nat_snat1" {
   snat_table_id     = alicloud_nat_gateway.int_nat_gw1.snat_table_ids
   source_vswitch_id = module.vpc.vswitch_ids[1]
   snat_ip           = alicloud_eip_address.eip_addr_snat1.ip_address
+}
+
+
+resource "alicloud_nat_gateway" "int_nat_gw2" {
+  vpc_id           = module.vpc.vpc_id
+  nat_gateway_name = "${var.env_name}-${var.project}-ingw2"
+  payment_type     = "PayAsYouGo"
+  vswitch_id       = module.vpc.vswitch_ids[2]
+  nat_type         = "Enhanced"
+}
+
+resource "alicloud_eip_address" "eip_addr_snat2" {
+  address_name  = "${var.env_name}-${var.project}-eipaddr2"
+}
+
+resource "alicloud_eip_association" "int_nat_assoc2" {
+  allocation_id = alicloud_eip_address.eip_addr_snat2.id
+  instance_type = "Nat"
+  instance_id   = alicloud_nat_gateway.int_nat_gw2.id
+}
+
+resource "alicloud_snat_entry" "int_nat_snat2" {
+  snat_table_id     = alicloud_nat_gateway.int_nat_gw2.snat_table_ids
+  source_vswitch_id = module.vpc.vswitch_ids[2]
+  snat_ip           = alicloud_eip_address.eip_addr_snat2.ip_address
 }
