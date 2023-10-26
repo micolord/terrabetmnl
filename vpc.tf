@@ -25,7 +25,7 @@ module "nat-gateway1" {
   create = true
   vpc_id = module.vpc.vpc_id
   name   = "${var.env_name}-${var.project}-natgw1"
-  vswitch_id = module.vpc.vswitch_ids[1]
+  #vswitch_id = module.vpc.vswitch_ids[1]
 
   // Create eip and bind them with nat gateway
   create_eip    = true

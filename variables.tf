@@ -14,10 +14,6 @@ variable "vpc_cidr" {
     description = "VPC CIDR"
 }
 
-variable "vswitch_id" {
-    description = "VSWITCH ID"
-}
-
 variable "priv_a" {
     description = "PRIVATE SWITCH"
 }
