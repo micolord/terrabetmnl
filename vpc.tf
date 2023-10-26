@@ -18,14 +18,16 @@ module "vpc" {
   }
 }
 
-module "nat-gateway1" {
+module "nat_gateway1" {
   source = "terraform-alicloud-modules/nat-gateway/alicloud"
   region = var.region
 
+  use_existing_nat_gateway = false
   create = true
-  vpc_id = module.vpc.vpc_id
+
+  vpc_id = module.vpc.this_vpc_id
   name   = "${var.env_name}-${var.project}-natgw1"
-  vswitch_id = module.vpc.vswitch_ids[1]
+  vswitch_id = module.vpc.this_vswitch_ids[1]
 
   // Create eip and bind them with nat gateway
   create_eip    = true
