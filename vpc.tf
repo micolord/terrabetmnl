@@ -45,5 +45,5 @@ resource "alicloud_eip_association" "int_nat_assoc1" {
 resource "alicloud_snat_entry" "int_nat_snat1" {
   snat_table_id     = alicloud_nat_gateway.int_nat_gw1.snat_table_ids
   source_vswitch_id = module.vpc.vswitch_ids[1]
-  snat_ip           = alicloud_eip.snat_eip1.id
+  snat_ip           = alicloud_eip.snat_eip1.ip_address
 }
