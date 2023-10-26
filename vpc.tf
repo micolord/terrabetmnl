@@ -19,7 +19,9 @@ module "vpc" {
 }
 
 resource "alicloud_nat_gateway" "int_nat_gw1" {
-  vpc_id        = module.vpc.vpc_id
-  specification = "Small"
-  nat_gate_name = "${var.env_name}-${var.project}-ingw"
+  vpc_id           = module.vpc.vpc_id
+  nat_gateway_name = "${var.env_name}-${var.project}-ingw"
+  payment_type     = "PayAsYouGo"
+  vswitch_id       = module.vpc.vswitch_ids[1]
+  nat_type         = "Enhanced"
 }
