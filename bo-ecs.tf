@@ -26,16 +26,16 @@ module "bo-ecs-module" {
   }
 }
 
-resource "alicloud_kms_secret" "default" {
+resource "alicloud_kms_secret" "default2" {
   secret_name                   = "secretfoo"
   description                   = "from terraform"
-  secret_data                   = random_password.password.result
+  secret_data                   = "${random_password.password.result}"
   version_id                    = "000000000001"
   force_delete_without_recovery = true
   secret_type = "ECS"
 }
 
-resource "random_password" "password" {
+resource "random_password" "password2" {
   length           = 10
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
