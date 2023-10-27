@@ -1,6 +1,7 @@
 resource "alicloud_security_group" "bo-sg" {
   name        = "bo-sg"
   description = "bo-sg security group"
+  vpc_id = alicloud_vpc.vpc.id
 }
 
 resource "alicloud_security_group" "bo-sg-rule" {
