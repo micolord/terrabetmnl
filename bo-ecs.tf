@@ -27,7 +27,7 @@ module "bo-ecs-module" {
 }
 
 resource "alicloud_kms_secret" "default" {
-  secret_name                   = "secret-foo"
+  secret_name                   = "secretfoo"
   description                   = "from terraform"
   secret_data                   = random_password.password.result
   version_id                    = "000000000001"
