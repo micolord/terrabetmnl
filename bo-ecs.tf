@@ -29,9 +29,10 @@ module "bo-ecs-module" {
 resource "alicloud_kms_secret" "bo-pw" {
   secret_name                   = "${var.env_name}-${var.project}-bo-pw"
   description                   = "from terraform"
-  secret_data                   = "Test1234$$"
+  secret_data                   = random_password.password.result
   version_id                    = "000000000001"
   force_delete_without_recovery = true
+  secret_type = "ECS"
 }
 
 resource "random_password" "password" {
