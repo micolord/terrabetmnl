@@ -16,7 +16,7 @@ module "bo-ecs-module" {
   security_group_ids          = [alicloud_security_group.bo-sg.id]
   associate_public_ip_address = false
 
-  system_disk_category = "cloud_ssd"
+  system_disk_category = "enhanced_ssd"
   system_disk_size     = 100
 
   tags = {
