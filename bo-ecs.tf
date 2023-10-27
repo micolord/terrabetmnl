@@ -13,7 +13,7 @@ module "bo-ecs-module" {
   image_id                    = data.alicloud_images.ubuntu.ids.0
   instance_type               = "ecs.g8a.large"
   vswitch_id                  = module.vpc.vswitch_ids[1]
-  security_group_ids          = [module.bo-sg-module.this_security_group_id]
+  security_group_ids          = [alicloud_security_group.bo-sg.id]
   associate_public_ip_address = false
 
   system_disk_category = "cloud_ssd"
