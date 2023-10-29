@@ -36,6 +36,29 @@ resource "alicloud_alb_listener" "default_80" {
   }
 }
 
+resource "alicloud_alb_rule" "fe_rule" {
+  rule_name   = "${var.env_name}-${var.project}-fe-rule"
+  listener_id = alicloud_alb_listener.default_80.id
+  priority    = "2"
+  rule_conditions {
+    type = "Host"
+    host_config {
+      values = ["tf-example-fe.com"]
+    }
+  }
+
+  rule_actions {
+    forward_group_config {
+      server_group_tuples {
+        server_group_id = alicloud_alb_server_group.fe_grp.id
+      }
+    }
+    order = "1"
+    type  = "ForwardGroup"
+  }
+}
+
+
 resource "alicloud_alb_server_group" "fe_grp" {
   protocol          = "HTTP"
   vpc_id            = module.vpc.vpc_id
@@ -44,9 +67,9 @@ resource "alicloud_alb_server_group" "fe_grp" {
     health_check_connect_port = "80"
     health_check_enabled      = true
     health_check_codes        = ["http_2xx", "http_3xx"]
-    health_check_http_version = "HTTP1.1"
+    #health_check_http_version = "HTTP1.1"
     health_check_interval     = "2"
-    health_check_method       = "HEAD"
+    #health_check_method       = "HEAD"
     #health_check_path         = "/tf-example"
     #health_check_host         = "tfexample.com"
     health_check_protocol     = "TCP"
@@ -73,3 +96,62 @@ resource "alicloud_alb_server_group" "fe_grp" {
   }
 }
 
+resource "alicloud_alb_rule" "bo_rule" {
+  rule_name   = "${var.env_name}-${var.project}-bo-rule"
+  listener_id = alicloud_alb_listener.default_80.id
+  priority    = "3"
+  rule_conditions {
+    type = "Host"
+    host_config {
+      values = ["tf-example-bo.com"]
+    }
+  }
+
+  rule_actions {
+    forward_group_config {
+      server_group_tuples {
+        server_group_id = alicloud_alb_server_group.bo_grp.id
+      }
+    }
+    order = "1"
+    type  = "ForwardGroup"
+  }
+}
+
+
+resource "alicloud_alb_server_group" "bo_grp" {
+  protocol          = "HTTP"
+  vpc_id            = module.vpc.vpc_id
+  server_group_name = "${var.env_name}-${var.project}-bo-grp"
+  health_check_config {
+    health_check_connect_port = "80"
+    health_check_enabled      = true
+    health_check_codes        = ["http_2xx", "http_3xx"]
+    #health_check_http_version = "HTTP1.1"
+    health_check_interval     = "2"
+    #health_check_method       = "HEAD"
+    #health_check_path         = "/tf-example"
+    #health_check_host         = "tfexample.com"
+    health_check_protocol     = "TCP"
+    health_check_timeout      = 5
+    healthy_threshold         = 3
+    unhealthy_threshold       = 3
+  }
+  sticky_session_config {
+    sticky_session_enabled = false
+    cookie                 = "tf-example"
+    sticky_session_type    = "Server"
+  }
+  servers {
+    description = "${var.env_name}-${var.project}-bo-1"
+    port        = 80
+    server_id   = alicloud_instance.bo_ecs_instance_1.id
+    server_type = "Ecs"
+  }
+  servers {
+    description = "${var.env_name}-${var.project}-bo-2"
+    port        = 80
+    server_id   = alicloud_instance.bo_ecs_instance_2.id
+    server_type = "Ecs"
+  }
+}
