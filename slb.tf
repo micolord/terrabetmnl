@@ -5,7 +5,7 @@ resource "alicloud_alb_load_balancer" "default" {
   address_type           = "Intranet"
   address_allocated_mode = "Fixed"
   load_balancer_name     = "${var.env_name}-${var.project}-intra-lb"
-  load_balancer_edition  = "WAF Enabled"
+  load_balancer_edition  = "StandardWithWaf"
   load_balancer_billing_config {
     pay_type = "PayAsYouGo"
   }
