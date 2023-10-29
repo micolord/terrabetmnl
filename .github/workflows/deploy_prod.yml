@@ -165,7 +165,7 @@ jobs:
 
       - name: Replace credentials
         run: |
-          find . -name "*" -exec sed -i "s/dynamic_random_password/${{ secrets.ALICLOUD_RANDOM_PASSWORD }}/g" {} 
+          find . -name "*" -exec sed -i "s/dynamic_random_password/${{ secrets.ALICLOUD_RANDOM_PASSWORD }}/g" {} +
 
       - name: Terraform Init
         id: init
