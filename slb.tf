@@ -53,6 +53,11 @@ resource "alicloud_alb_server_group" "fe_grp" {
     healthy_threshold         = 3
     unhealthy_threshold       = 3
   }
+  sticky_session_config {
+    sticky_session_enabled = false
+    cookie                 = "tf-example"
+    sticky_session_type    = "Server"
+  }
   servers {
     description = "${var.env_name}-${var.project}-fe-1"
     port        = 80
