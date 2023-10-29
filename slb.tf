@@ -48,6 +48,7 @@ resource "alicloud_alb_server_group" "fe_grp" {
     health_check_interval     = "2"
     health_check_method       = "HEAD"
     #health_check_path         = "/tf-example"
+    health_check_host         = "tfexample.com"
     health_check_protocol     = "HTTP"
     health_check_timeout      = 5
     healthy_threshold         = 3
