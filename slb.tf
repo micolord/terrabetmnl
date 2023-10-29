@@ -61,7 +61,6 @@ resource "alicloud_alb_rule" "fe_rule" {
 
 
 resource "alicloud_alb_server_group" "fe_grp" {
-  depends_on        = [alicloud_alb_listener.default_80]
   protocol          = "HTTP"
   vpc_id            = module.vpc.vpc_id
   server_group_name = "${var.env_name}-${var.project}-fe-grp"
@@ -123,7 +122,6 @@ resource "alicloud_alb_rule" "bo_rule" {
 
 
 resource "alicloud_alb_server_group" "bo_grp" {
-  depends_on        = [alicloud_alb_listener.default_80]
   protocol          = "HTTP"
   vpc_id            = module.vpc.vpc_id
   server_group_name = "${var.env_name}-${var.project}-bo-grp"
