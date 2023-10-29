@@ -163,9 +163,13 @@ jobs:
       #    regex: false
       #    include: ".github/workflows/deploy_prod.yml"  
 
-      - name: Replace credentials
-        run: |
-          find . -name "*.tf" -exec sed -i "s/dynamic_random_password/ranDom123Test/g" {} +
+      - name: Find and Replace Creds
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "dynamic_random_password"
+          replace: "Random123$$$"
+          regex: false
+          #include: "backend.tf"    
 
       - name: Terraform Init
         id: init
