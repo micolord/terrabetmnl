@@ -15,7 +15,7 @@ module "bo-ecs-module" {
   vswitch_id                  = module.vpc.vswitch_ids[1]
   security_group_ids          = [alicloud_security_group.bo-sg.id]
   associate_public_ip_address = false
-  password = random_password.password2.result
+  password = "dynamic_random_password"
 
   system_disk_category = "cloud_essd"
   system_disk_size     = 100
@@ -24,19 +24,4 @@ module "bo-ecs-module" {
     Name      = "${var.env_name}-${var.project}-bo"
 
   }
-}
-
-resource "alicloud_kms_secret" "default2" {
-  secret_name                   = "secretfoo"
-  description                   = "from terraform"
-  secret_data                   = "${random_password.password2.result}"
-  version_id                    = "000000000001"
-  force_delete_without_recovery = true
-  secret_type = "ECS"
-}
-
-resource "random_password" "password2" {
-  length           = 10
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
 }
