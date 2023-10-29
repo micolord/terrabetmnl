@@ -1,13 +1,13 @@
-resource "alicloud_security_group" "bo-sg" {
-  name        = "${var.env_name}-${var.project}-bo-sg"
+resource "alicloud_security_group" "fe-sg" {
+  name        = "${var.env_name}-${var.project}-fe-sg"
   description = "${var.env_name}-${var.project} security group"
   vpc_id = module.vpc.vpc_id
 }
 
-resource "alicloud_security_group_rule" "bo-https" {
+resource "alicloud_security_group_rule" "fe-https" {
   type              = "ingress"
   ip_protocol       = "tcp"
   port_range        = "443/443"
-  security_group_id = alicloud_security_group.bo-sg.id
+  security_group_id = alicloud_security_group.fe-sg.id
   cidr_ip           = var.vpc_cidr
 }
