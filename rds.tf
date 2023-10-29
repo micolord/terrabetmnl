@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 data "alicloud_db_zones" "example" {
   engine                   = "MariaDB"
   engine_version           = "10.3"
@@ -13,6 +14,9 @@ data "alicloud_db_instance_classes" "example" {
 }
 
 resource "alicloud_db_instance" "example" {
+=======
+resource "alicloud_db_instance" "default" {
+>>>>>>> b0b3d34 (deploy DB)
   engine                   = "MariaDB"
   engine_version           = "10.3"
   instance_type            = "mariadb.x4.large.2c"
