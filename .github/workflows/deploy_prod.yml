@@ -50,13 +50,13 @@ jobs:
         with:
           terraform_version: 1.6.2 
 
-      - name: Find and Replace
+      - name: Find and Replace Env
         uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: "dynamic_env"
           replace: "prod"
           regex: false
-          include: "backend.tf"    
+          include: "backend.tf"      
 
       - name: Terraform Init
         id: init
@@ -154,6 +154,14 @@ jobs:
           replace: "prod"
           regex: false
           include: "backend.tf"    
+
+      - name: Find and Replace Secrets
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "dynamic_random_password"
+          replace: ${{ secrets.ALICLOUD_RANDOM_PASS }}
+          regex: false
+          include: ".github/workflows/deploy_prod.yml"  
 
       - name: Terraform Init
         id: init
