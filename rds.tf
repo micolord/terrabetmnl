@@ -1,22 +1,5 @@
-<<<<<<< HEAD
-data "alicloud_db_zones" "example" {
-  engine                   = "MariaDB"
-  engine_version           = "10.3"
-  category                 = "HighAvailability"
-  db_instance_storage_type = "cloud_essd"
-}
-
-data "alicloud_db_instance_classes" "example" {
-  engine                   = "MariaDB"
-  engine_version           = "10.3"
-  category                 = "HighAvailability"
-  db_instance_storage_type = "cloud_essd"
-}
-
-resource "alicloud_db_instance" "example" {
-=======
 resource "alicloud_db_instance" "default" {
->>>>>>> b0b3d34 (deploy DB)
+
   engine                   = "MariaDB"
   engine_version           = "10.3"
   instance_type            = "mariadb.x4.large.2c"
