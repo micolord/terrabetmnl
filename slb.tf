@@ -21,21 +21,6 @@ resource "alicloud_alb_load_balancer" "default" {
   }
 }
 
-resource "alicloud_alb_server_group" "default" {
-  protocol          = "HTTP"
-  vpc_id            = alicloud_vpc.default.id
-  server_group_name = "${var.env_name}-${var.project}-80-servergrp"
-  health_check_config {
-    health_check_enabled = "false"
-  }
-  sticky_session_config {
-    sticky_session_enabled = "false"
-  }
-  tags = {
-    Created = "TF"
-  }
-}
-
 resource "alicloud_alb_listener" "default_80" {
   load_balancer_id     = alicloud_alb_load_balancer.default.id
   listener_protocol    = "HTTP"
@@ -72,13 +57,13 @@ resource "alicloud_alb_server_group" "fe_grp" {
     description = "${var.env_name}-${var.project}-fe-1"
     port        = 80
     server_id   = alicloud_instance.fe_ecs_instance_1.id
-    weight      = 10
+    server_type = "Ecs"
   }
   servers {
     description = "${var.env_name}-${var.project}-fe-2"
     port        = 80
     server_id   = alicloud_instance.fe_ecs_instance_2.id
-    weight      = 10
+    server_type = "Ecs"
   }
 }
 
