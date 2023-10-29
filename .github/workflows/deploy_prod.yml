@@ -93,6 +93,14 @@ jobs:
           regex: false
           include: "backend.tf"    
 
+      - name: Find and Replace Creds
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "dynamic_random_password"
+          replace: ${{ secrets.ALICLOUD_RANDOM_PASSWORD }}
+          regex: false
+          #include: "backend.tf"    
+
       - name: Terraform Init
         id: init
         run: terraform init
@@ -162,14 +170,6 @@ jobs:
       #    replace: ${{ secrets.ALICLOUD_RANDOM_PASSWORD }}
       #    regex: false
       #    include: ".github/workflows/deploy_prod.yml"  
-
-      - name: Find and Replace Creds
-        uses: jacobtomlinson/gha-find-replace@v3
-        with:
-          find: "dynamic_random_password"
-          replace: "Random123$$$"
-          regex: false
-          #include: "backend.tf"    
 
       - name: Terraform Init
         id: init
