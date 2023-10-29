@@ -159,7 +159,7 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: "dynamic_random_password"
-          replace: ${{ secrets.ALICLOUD_RANDOM_PASS }}
+          replace: ${{ secrets.ALICLOUD_RANDOM_PASSWORD }}
           regex: false
           include: ".github/workflows/deploy_prod.yml"  
 
