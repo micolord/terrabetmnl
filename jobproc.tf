@@ -1,8 +1,3 @@
-data "alicloud_images" "ubuntu" {
-  most_recent = true
-  name_regex  = "^ubuntu_18.*64"
-}
-
 resource "alicloud_instance" "jobproc_ecs_instance_1" {
   instance_name        = "${var.env_name}-${var.project}-jobproc-1"
   image_id             = data.alicloud_images.ubuntu.ids.0
