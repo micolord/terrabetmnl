@@ -15,6 +15,6 @@ resource "alicloud_db_instance" "default" {
   db_instance_storage_type = "cloud_essd"
   #security_group_ids       = [alicloud_security_group.rds-sg.id]
   category                 = "Basic"
-  master_username          = "apsarauser"
-  master_user_password     = "dynamic_random_password"
+  #master_username          = "apsarauser"
+  #master_user_password     = "dynamic_random_password"
 }
