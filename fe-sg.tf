@@ -11,3 +11,11 @@ resource "alicloud_security_group_rule" "fe-https" {
   security_group_id = alicloud_security_group.fe-sg.id
   cidr_ip           = var.vpc_cidr
 }
+
+resource "alicloud_security_group_rule" "fe-https-egress" {
+  type              = "egress"
+  ip_protocol       = "tcp"
+  port_range        = "443/443"
+  security_group_id = alicloud_security_group.bo-sg.id
+  cidr_ip           = var.vpc_cidr
+}
