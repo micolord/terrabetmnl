@@ -13,6 +13,8 @@ resource "alicloud_db_instance" "default" {
   vswitch_id               = module.vpc.vswitch_ids[3]
   monitoring_period        = "60"
   db_instance_storage_type = "cloud_essd"
-  security_group_ids       = [alicloud_security_group.rds-sg.id]
+  #security_group_ids       = [alicloud_security_group.rds-sg.id]
   category                 = "Basic"
+  master_username          = "apsarauser"
+  master_user_password     = "dynamic_random_password"
 }
