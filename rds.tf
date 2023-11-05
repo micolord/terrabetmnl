@@ -19,3 +19,13 @@ resource "alicloud_db_instance" "default" {
   #master_username          = "apsarauser"
   #master_user_password     = "dynamic_random_password"
 }
+
+resource "alicloud_db_readonly_instance" "default" {
+  zone_id               = data.alicloud_db_zones.default.zones.0.id
+  master_db_instance_id = alicloud_db_instance.default.id
+  engine_version        = alicloud_db_instance.default.engine_version
+  instance_storage      = alicloud_db_instance.default.instance_storage
+  instance_type         = alicloud_db_instance.default.instance_type
+  instance_name         = "${var.env_name}-${var.project}-readonly"
+  vswitch_id            = module.vpc.vswitch_ids[3]
+}
