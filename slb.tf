@@ -36,15 +36,57 @@ resource "alicloud_alb_listener" "default_80" {
   }
 }
 
-resource "alicloud_alb_rule" "fe_rule" {
-  depends_on  = [alicloud_alb_listener.default_80]
+resource "alicloud_alb_listener" "default_443" {
+  load_balancer_id     = alicloud_alb_load_balancer.default.id
+  listener_protocol    = "HTTPS"
+  listener_port        = 443
+  listener_description = "${var.env_name}-${var.project}-443-listener"
+  default_actions {
+    type = "ForwardGroup"
+    forward_group_config {
+      server_group_tuples {
+       server_group_id = alicloud_alb_server_group.fe_grp.id
+      }
+    }
+  }
+  certificates {
+    certificate_id = var.cert_id
+  }
+}
+
+
+
+
+resource "alicloud_alb_rule" "gl_fe_rule" {
   rule_name   = "${var.env_name}-${var.project}-fe-rule"
   listener_id = alicloud_alb_listener.default_80.id
   priority    = "2"
   rule_conditions {
     type = "Host"
     host_config {
-      values = ["tf-example-fe.com"]
+      values = ["${var.gl_fe_domain}"]
+    }
+  }
+
+  rule_actions {
+    forward_group_config {
+      server_group_tuples {
+        server_group_id = alicloud_alb_server_group.fe_grp.id
+      }
+    }
+    order = "1"
+    type  = "ForwardGroup"
+  }
+}
+
+resource "alicloud_alb_rule" "gl_fe_rule_https" {
+  rule_name   = "${var.env_name}-${var.project}-fe-rule-https"
+  listener_id = alicloud_alb_listener.default_443.id
+  priority    = "3"
+  rule_conditions {
+    type = "Host"
+    host_config {
+      values = ["${var.gl_fe_domain}"]
     }
   }
 
@@ -98,14 +140,13 @@ resource "alicloud_alb_server_group" "fe_grp" {
 }
 
 resource "alicloud_alb_rule" "bo_rule" {
-  depends_on  = [alicloud_alb_listener.default_80]
   rule_name   = "${var.env_name}-${var.project}-bo-rule"
   listener_id = alicloud_alb_listener.default_80.id
   priority    = "3"
   rule_conditions {
     type = "Host"
     host_config {
-      values = ["tf-example-bo.com"]
+      values = ["${var.be_domain}"]
     }
   }
 
@@ -159,7 +200,6 @@ resource "alicloud_alb_server_group" "bo_grp" {
 }
 
 resource "alicloud_alb_rule" "jobproc_rule" {
-  depends_on  = [alicloud_alb_listener.default_80]
   rule_name   = "${var.env_name}-${var.project}-jobproc-rule"
   listener_id = alicloud_alb_listener.default_80.id
   priority    = "4"
@@ -220,7 +260,6 @@ resource "alicloud_alb_server_group" "jobproc_grp" {
 }
 
 resource "alicloud_alb_rule" "socket_rule" {
-  depends_on  = [alicloud_alb_listener.default_80]
   rule_name   = "${var.env_name}-${var.project}-socket-rule"
   listener_id = alicloud_alb_listener.default_80.id
   priority    = "5"
