@@ -1,6 +1,6 @@
 data "alicloud_images" "ubuntu" {
   most_recent = true
-  name_regex  = "^ubuntu_18.*64"
+  name_regex  = "^ubuntu_20.*64"
 }
 
 resource "alicloud_instance" "bo_ecs_instance_1" {
