@@ -142,7 +142,7 @@ resource "alicloud_alb_server_group" "gl_fe_grp" {
 resource "alicloud_alb_rule" "bo_fe_rule" {
   rule_name   = "${var.env_name}-${var.project}-bo-rule"
   listener_id = alicloud_alb_listener.default_80.id
-  priority    = "3"
+  priority    = "4"
   rule_conditions {
     type = "Host"
     host_config {
@@ -202,7 +202,7 @@ resource "alicloud_alb_server_group" "bo_fe_grp" {
 resource "alicloud_alb_rule" "jobproc_rule" {
   rule_name   = "${var.env_name}-${var.project}-jobproc-rule"
   listener_id = alicloud_alb_listener.default_80.id
-  priority    = "4"
+  priority    = "5"
   rule_conditions {
     type = "Host"
     host_config {
@@ -262,7 +262,7 @@ resource "alicloud_alb_server_group" "jobproc_grp" {
 resource "alicloud_alb_rule" "socket_rule" {
   rule_name   = "${var.env_name}-${var.project}-socket-rule"
   listener_id = alicloud_alb_listener.default_80.id
-  priority    = "5"
+  priority    = "6"
   rule_conditions {
     type = "Host"
     host_config {
