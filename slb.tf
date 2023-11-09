@@ -30,7 +30,7 @@ resource "alicloud_alb_listener" "default_80" {
     type = "ForwardGroup"
     forward_group_config {
       server_group_tuples {
-        server_group_id = alicloud_alb_server_group.fe_grp.id
+        server_group_id = alicloud_alb_server_group.gl_fe_grp.id
       }
     }
   }
@@ -45,7 +45,7 @@ resource "alicloud_alb_listener" "default_443" {
     type = "ForwardGroup"
     forward_group_config {
       server_group_tuples {
-       server_group_id = alicloud_alb_server_group.fe_grp.id
+       server_group_id = alicloud_alb_server_group.gl_fe_grp.id
       }
     }
   }
@@ -71,7 +71,7 @@ resource "alicloud_alb_rule" "gl_fe_rule" {
   rule_actions {
     forward_group_config {
       server_group_tuples {
-        server_group_id = alicloud_alb_server_group.fe_grp.id
+        server_group_id = alicloud_alb_server_group.gl_fe_grp.id
       }
     }
     order = "1"
@@ -93,7 +93,7 @@ resource "alicloud_alb_rule" "gl_fe_rule_https" {
   rule_actions {
     forward_group_config {
       server_group_tuples {
-        server_group_id = alicloud_alb_server_group.fe_grp.id
+        server_group_id = alicloud_alb_server_group.gl_fe_grp.id
       }
     }
     order = "1"
@@ -102,7 +102,7 @@ resource "alicloud_alb_rule" "gl_fe_rule_https" {
 }
 
 
-resource "alicloud_alb_server_group" "fe_grp" {
+resource "alicloud_alb_server_group" "gl_fe_grp" {
   protocol          = "HTTP"
   vpc_id            = module.vpc.vpc_id
   server_group_name = "${var.env_name}-${var.project}-fe-grp"
@@ -139,21 +139,21 @@ resource "alicloud_alb_server_group" "fe_grp" {
   }
 }
 
-resource "alicloud_alb_rule" "bo_rule" {
+resource "alicloud_alb_rule" "bo_fe_rule" {
   rule_name   = "${var.env_name}-${var.project}-bo-rule"
   listener_id = alicloud_alb_listener.default_80.id
   priority    = "3"
   rule_conditions {
     type = "Host"
     host_config {
-      values = ["${var.be_domain}"]
+      values = ["${var.bo_fe_domain}"]
     }
   }
 
   rule_actions {
     forward_group_config {
       server_group_tuples {
-        server_group_id = alicloud_alb_server_group.bo_grp.id
+        server_group_id = alicloud_alb_server_group.bo_fe_grp.id
       }
     }
     order = "1"
@@ -162,7 +162,7 @@ resource "alicloud_alb_rule" "bo_rule" {
 }
 
 
-resource "alicloud_alb_server_group" "bo_grp" {
+resource "alicloud_alb_server_group" "bo_fe_grp" {
   protocol          = "HTTP"
   vpc_id            = module.vpc.vpc_id
   server_group_name = "${var.env_name}-${var.project}-bo-grp"
