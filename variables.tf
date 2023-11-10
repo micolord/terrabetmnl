@@ -34,3 +34,27 @@ variable "az_a" {
     description = "AVAILABILITY ZONE"
 }
 
+variable "gl_fe_domain" {
+    description = "GL FE Domain"
+}
+
+variable "gl_be_domain" {
+    description = "GL BE Domain"
+}
+
+variable "bo_fe_domain" {
+    description = "BO FE Domain"
+}
+
+variable "bo_be_domain" {
+    description = "BO BE Domain"
+}
+
+variable "jobproc_domain" {
+    description = "Jobproc Domain"
+}
+
+variable "cert_id" {
+    description = "Cert ID"
+}
+
