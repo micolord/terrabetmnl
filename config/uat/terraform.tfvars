@@ -16,6 +16,7 @@ gl_be_domain = "gl-be.betmnl-uat.vip"
 bo_fe_domain = "bo-fe.betmnl-uat.vip"
 bo_be_domain = "bo-be.betmnl-uat.vip"
 jobproc_domain = "jobproc.betmnl-uat.vip"
+socket_domain  = "socket.betmnl-uat.vip"
 cert_id = "52346-ap-southeast-1"
 
 // Back Office
