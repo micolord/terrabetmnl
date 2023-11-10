@@ -11,7 +11,13 @@ priv_c = "10.0.4.0/24"
 az_a = "ap-southeast-6a"
 
 // domains
-bo_domain = "gl-be-betmnl.vip"
+gl_fe_domain = "betmnl.vip"
+gl_be_domain = "gl-be.betmnl.vip"
+bo_fe_domain = "bo-fe.betmnl.vip"
+bo_be_domain = "bo-be.betmnl.vip"
+jobproc_domain = "jobproc.betmnl.vip"
+socket_domain  = "socket.betmnl.vip"
+cert_id = "52346-ap-southeast-1"
 
 // Back Office
 #bo_fe_ami_id = "aliyun_3_x64_20G_qboot_alibase_20230727.vhd"
