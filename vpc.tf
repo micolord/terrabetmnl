@@ -17,6 +17,7 @@ module "vpc" {
     Environment  = var.env_name
   }
 }
+
 /*
 resource "alibabacloudstack_route_table" "rtb_2" {
   vpc_id      = "${alibabacloudstack_vpc.foo.id}"
@@ -36,6 +37,7 @@ resource "alibabacloudstack_route_table_attachment" "foo" {
   route_table_id = alibabacloudstack_route_table.rtb_2.id
 }
 */
+
 resource "alicloud_nat_gateway" "int_nat_gw1" {
   vpc_id           = module.vpc.vpc_id
   nat_gateway_name = "${var.env_name}-${var.project}-ingw1"
