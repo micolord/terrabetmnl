@@ -10,9 +10,7 @@ resource "alicloud_instance" "fe_ecs_instance_1" {
   tags = {
     Name = "${var.env_name}-${var.project}-gl-fe"
   }
-  volume_tags = {
-    Name = "${var.env_name}-${var.project}-gl-fe"
-  }
+
 }
 
 resource "alicloud_instance" "fe_ecs_instance_2" {
@@ -27,7 +25,5 @@ resource "alicloud_instance" "fe_ecs_instance_2" {
   tags = {
     Name = "${var.env_name}-${var.project}-gl-be"
   }
-  volume_tags = {
-    Name = "${var.env_name}-${var.project}-gl-be"
-  }
+
 }

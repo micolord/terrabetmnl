@@ -15,9 +15,6 @@ resource "alicloud_instance" "bo_ecs_instance_1" {
   tags = {
     Name = "${var.env_name}-${var.project}-bo-fe"
   }
-  volume_tags = {
-    Name = "${var.env_name}-${var.project}-bo-fe"
-  }
 }
 
 resource "alicloud_instance" "bo_ecs_instance_2" {
@@ -30,9 +27,6 @@ resource "alicloud_instance" "bo_ecs_instance_2" {
   system_disk_category = "cloud_essd"
   system_disk_size     = 100
   tags = {
-    Name = "${var.env_name}-${var.project}-bo-be"
-  }
-  volume_tags = {
     Name = "${var.env_name}-${var.project}-bo-be"
   }
 }
