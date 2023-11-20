@@ -18,6 +18,27 @@ module "vpc" {
   }
 }
 
+/*
+resource "alibabacloudstack_route_table" "rtb_2" {
+  vpc_id      = "${alibabacloudstack_vpc.foo.id}"
+  name        = "route-table-example-name"
+  description = "route-table-example-description"
+}
+
+resource "alibabacloudstack_route_entry" "rtb_2_nat_entry" {
+  route_table_id        = alibabacloudstack_vpc.rtb_2.route_table_id
+  destination_cidrblock = "0.0.0.0/0"
+  nexthop_type          = "NatGateway"
+  nexthop_id            = "${alibabacloudstack_instance.foo.id}"
+}
+
+resource "alibabacloudstack_route_table_attachment" "foo" {
+  vswitch_id     = "${alibabacloudstack_vswitch.foo.id}"
+  route_table_id = "${alibabacloudstack_route_table.foo.id}"
+}
+*/
+
+
 resource "alicloud_nat_gateway" "int_nat_gw1" {
   vpc_id           = module.vpc.vpc_id
   nat_gateway_name = "${var.env_name}-${var.project}-ingw1"
