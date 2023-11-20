@@ -18,7 +18,7 @@ module "vpc" {
   }
 }
 
-
+/*
 resource "alibabacloudstack_route_table" "rtb_2" {
   vpc_id      = "${alibabacloudstack_vpc.foo.id}"
   name        = "${var.env_name}-${var.project}-rtb-custom"
@@ -36,7 +36,7 @@ resource "alibabacloudstack_route_table_attachment" "foo" {
   vswitch_id     = module.vpc.vswitch_ids[2]
   route_table_id = alibabacloudstack_route_table.rtb_2.id
 }
-
+*/
 
 resource "alicloud_nat_gateway" "int_nat_gw1" {
   vpc_id           = module.vpc.vpc_id
