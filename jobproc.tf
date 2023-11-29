@@ -10,9 +10,6 @@ resource "alicloud_instance" "jobproc_ecs_instance_1" {
   tags = {
     Name = "${var.env_name}-${var.project}-jobproc"
   }
-  volume_tags = {
-    Name = "${var.env_name}-${var.project}-jobproc"
-  }
 }
 
 resource "alicloud_instance" "jobproc_ecs_instance_2" {
@@ -27,7 +24,5 @@ resource "alicloud_instance" "jobproc_ecs_instance_2" {
   tags = {
     Name = "${var.env_name}-${var.project}-jobproc"
   }
-  volume_tags = {
-    Name = "${var.env_name}-${var.project}-jobproc"
-  }
+
 }
