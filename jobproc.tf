@@ -12,6 +12,7 @@ resource "alicloud_instance" "jobproc_ecs_instance_1" {
   }
 }
 
+/*
 resource "alicloud_instance" "jobproc_ecs_instance_2" {
   instance_name        = "${var.env_name}-${var.project}-jobproc-2"
   image_id             = data.alicloud_images.ubuntu.ids.0
@@ -26,3 +27,4 @@ resource "alicloud_instance" "jobproc_ecs_instance_2" {
   }
 
 }
+*/
