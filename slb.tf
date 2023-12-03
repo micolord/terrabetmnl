@@ -26,6 +26,10 @@ resource "alicloud_alb_listener" "default_80" {
   listener_protocol    = "HTTP"
   listener_port        = 80
   listener_description = "${var.env_name}-${var.project}-80-listener"
+  x_forwarded_for_config {
+    x_forwarded_for_proto_enabled = true
+    x_forwarded_for_enabled = true
+  }
   default_actions {
     type = "ForwardGroup"
     forward_group_config {
@@ -41,6 +45,10 @@ resource "alicloud_alb_listener" "default_443" {
   listener_protocol    = "HTTPS"
   listener_port        = 443
   listener_description = "${var.env_name}-${var.project}-443-listener"
+  x_forwarded_for_config {
+    x_forwarded_for_proto_enabled = true
+    x_forwarded_for_enabled = true
+  }
   default_actions {
     type = "ForwardGroup"
     forward_group_config {
