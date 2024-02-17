@@ -1,4 +1,4 @@
-data "alicloud_db_zones" "default" {}
+/*data "alicloud_db_zones" "default" {}
 
 resource "alicloud_db_instance" "default" {
   engine                   = "MariaDB"
@@ -28,3 +28,4 @@ resource "alicloud_db_instance" "default" {
 #  instance_name         = "${var.env_name}-${var.project}-readonly"
 #  vswitch_id            = module.vpc.vswitch_ids[3]
 #}
+*/
