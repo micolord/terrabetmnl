@@ -211,12 +211,12 @@ resource "alicloud_alb_server_group" "jobproc_grp" {
     server_id   = alicloud_instance.jobproc_ecs_instance_1.id
     server_type = "Ecs"
   }
-  servers {
-    description = "${var.env_name}-${var.project}-jobproc-2"
-    port        = 80
-    server_id   = alicloud_instance.jobproc_ecs_instance_2.id
-    server_type = "Ecs"
-  }
+#  servers {
+#    description = "${var.env_name}-${var.project}-jobproc-2"
+#    port        = 80
+#    server_id   = alicloud_instance.jobproc_ecs_instance_2.id
+#    server_type = "Ecs"
+#  }
 }
 
 resource "alicloud_alb_rule" "socket_rule" {
@@ -243,39 +243,39 @@ resource "alicloud_alb_rule" "socket_rule" {
 }
 
 
-resource "alicloud_alb_server_group" "socket_grp" {
-  protocol          = "HTTP"
-  vpc_id            = module.vpc.vpc_id
-  server_group_name = "${var.env_name}-${var.project}-socket-grp"
-  health_check_config {
-    health_check_connect_port = "80"
-    health_check_enabled      = true
-    health_check_codes        = ["http_2xx", "http_3xx"]
+#resource "alicloud_alb_server_group" "socket_grp" {
+#  protocol          = "HTTP"
+#  vpc_id            = module.vpc.vpc_id
+#  server_group_name = "${var.env_name}-${var.project}-socket-grp"
+#  health_check_config {
+#    health_check_connect_port = "80"
+#    health_check_enabled      = true
+#    health_check_codes        = ["http_2xx", "http_3xx"]
     #health_check_http_version = "HTTP1.1"
-    health_check_interval     = "2"
+#    health_check_interval     = "2"
     #health_check_method       = "HEAD"
     #health_check_path         = "/tf-example"
     #health_check_host         = "tfexample.com"
-    health_check_protocol     = "TCP"
-    health_check_timeout      = 5
-    healthy_threshold         = 3
-    unhealthy_threshold       = 3
-  }
-  sticky_session_config {
-    sticky_session_enabled = false
-    cookie                 = "tf-example"
-    sticky_session_type    = "Server"
-  }
-  servers {
-    description = "${var.env_name}-${var.project}-socket-1"
-    port        = 80
-    server_id   = alicloud_instance.socket_ecs_instance_1.id
-    server_type = "Ecs"
-  }
-  servers {
-    description = "${var.env_name}-${var.project}-socket-2"
-    port        = 80
-    server_id   = alicloud_instance.socket_ecs_instance_2.id
-    server_type = "Ecs"
-  }
-}
+#    health_check_protocol     = "TCP"
+#    health_check_timeout      = 5
+#    healthy_threshold         = 3
+#    unhealthy_threshold       = 3
+#  }
+#  sticky_session_config {
+#    sticky_session_enabled = false
+#    cookie                 = "tf-example"
+#    sticky_session_type    = "Server"
+#  }
+  #servers {
+  #  description = "${var.env_name}-${var.project}-socket-1"
+  #  port        = 80
+  #  server_id   = alicloud_instance.socket_ecs_instance_1.id
+  #  server_type = "Ecs"
+  #}
+  #servers {
+  #  description = "${var.env_name}-${var.project}-socket-2"
+  #  port        = 80
+  #  server_id   = alicloud_instance.socket_ecs_instance_2.id
+  #  server_type = "Ecs"
+  #}
+#}
