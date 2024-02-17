@@ -1,7 +1,7 @@
 terraform {
   backend "oss" {
-    bucket = "dynamic_env-imba-bucket"
+    bucket = "dynamic_env-imbasg-bucket"
     key   = "dynamic_env-state.tfstate"
-    region = "ap-southeast-6"
+    region = "ap-southeast-1"
   }
 }
