@@ -8,11 +8,11 @@ pub_a = "10.0.0.0/24"
 priv_a = "10.0.2.0/24"
 priv_b = "10.0.3.0/24"
 priv_c = "10.0.4.0/24"
-az_a = "ap-southeast-6a"
+az_a = "ap-southeast-1a"
 
 // domains
 #gl_fe_domain = "betmnl.vip"
-#gl_be_domain = "gl-be.betmnl.vip"
+#gl_be_domain = "gl-be.betmnl.vip"/
 #bo_fe_domain = "bo-fe.betmnl.vip"
 #bo_be_domain = "bo-be.betmnl.vip"
 #jobproc_domain = "jobproc.betmnl.vip"

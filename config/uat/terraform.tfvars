@@ -8,7 +8,7 @@ pub_a = "10.1.0.0/24"
 priv_a = "10.1.2.0/24"
 priv_b = "10.1.3.0/24"
 priv_c = "10.1.4.0/24"
-az_a = "ap-southeast-6a"
+az_a = "ap-southeast-1a"
 
 // domains
 #gl_fe_domain = "betmnl-uat.vip"
