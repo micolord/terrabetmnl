@@ -219,28 +219,28 @@ resource "alicloud_alb_server_group" "jobproc_grp" {
 #  }
 }
 
-resource "alicloud_alb_rule" "socket_rule" {
-  depends_on  = [alicloud_alb_listener.default_80]
-  rule_name   = "${var.env_name}-${var.project}-socket-rule"
-  listener_id = alicloud_alb_listener.default_80.id
-  priority    = "5"
-  rule_conditions {
-    type = "Host"
-    host_config {
-      values = ["tf-example-socket.com"]
-    }
-  }
+#resource "alicloud_alb_rule" "socket_rule" {
+#  depends_on  = [alicloud_alb_listener.default_80]
+#  rule_name   = "${var.env_name}-${var.project}-socket-rule"
+#  listener_id = alicloud_alb_listener.default_80.id
+#  priority    = "5"
+#  rule_conditions {
+#    type = "Host"
+#    host_config {
+#      values = ["tf-example-socket.com"]
+#    }
+#  }
 
-  rule_actions {
-    forward_group_config {
-      server_group_tuples {
-        server_group_id = alicloud_alb_server_group.socket_grp.id
-      }
-    }
-    order = "1"
-    type  = "ForwardGroup"
-  }
-}
+#  rule_actions {
+#    forward_group_config {
+#      server_group_tuples {
+#        server_group_id = alicloud_alb_server_group.socket_grp.id
+#      }
+#    }
+#    order = "1"
+#    type  = "ForwardGroup"
+#  }
+#}
 
 
 #resource "alicloud_alb_server_group" "socket_grp" {
