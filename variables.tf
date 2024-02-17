@@ -26,11 +26,15 @@ variable "priv_c" {
     description = "PRIVATE SWITCH"
 }
 
-variable "pub_a" {
-    description = "PUBLIC SWITCH"
+variable "priv_d" {
+    description = "PRIVATE SWITCH"
 }
 
 variable "az_a" {
+    description = "AVAILABILITY ZONE"
+}
+
+variable "az_b" {
     description = "AVAILABILITY ZONE"
 }
 
