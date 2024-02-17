@@ -5,8 +5,8 @@ module "vpc" {
   vpc_name          = "${var.env_name}-${var.project}-vpc"
   vpc_cidr          = var.vpc_cidr
 
-  availability_zones = [var.az_a]
-  vswitch_cidrs      = [var.priv_a, var.priv_b, var.priv_c, var.pub_a]
+  availability_zones = [var.az_a, var.az_b]
+  vswitch_cidrs      = [var.priv_a, var.priv_b, var.priv_c, var.priv_d]
 
   vpc_tags = {
     Environment = var.env_name
