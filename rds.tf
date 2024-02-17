@@ -8,10 +8,10 @@ resource "alicloud_db_instance" "default" {
   instance_type            = "mariadb.x4.large.2c"
   instance_storage         = "200"
   instance_name            = "${var.env_name}-${var.project}-master-rds"
-  zone_id                  = data.alicloud_db_zones.default.zones.0.id
-  zone_id_slave_a          = data.alicloud_db_zones.default.zones.1.id
-  #vswitch_id               = "module.vpc.vswitch_ids[3], module.vpc.vswitch_ids[4]"
-  vswitch_id               = join(",", module.vpc.vswitch_ids[*])
+  #zone_id                  = data.alicloud_db_zones.default.zones.0.id
+  zone_id                  = "ap-southeast-1(a,b)"
+  vswitch_id               = "module.vpc.vswitch_ids[2], module.vpc.vswitch_ids[3]"
+  #vswitch_id               = join(",", module.vpc.vswitch_ids[*])
   monitoring_period        = "60"
   db_instance_storage_type = "cloud_essd"
   security_ips             = [var.vpc_cidr]
