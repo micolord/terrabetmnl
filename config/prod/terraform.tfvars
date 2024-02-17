@@ -3,12 +3,13 @@ project = "imba"
 env_name = "prod"
 
 // network details
-vpc_cidr = "10.0.0.0/16"
-pub_a = "10.0.0.0/24"
-priv_a = "10.0.2.0/24"
-priv_b = "10.0.3.0/24"
-priv_c = "10.0.4.0/24"
+vpc_cidr = "10.1.0.0/16"
+priv_d = "10.1.0.0/24"
+priv_a = "10.1.2.0/24"
+priv_b = "10.1.3.0/24"
+priv_c = "10.1.4.0/24"
 az_a = "ap-southeast-1a"
+az_b = "ap-southeast-1b"
 
 // domains
 #gl_fe_domain = "betmnl.vip"
