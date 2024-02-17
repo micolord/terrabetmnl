@@ -57,9 +57,9 @@ resource "alicloud_alb_listener" "default_443" {
       }
     }
   }
-  certificates {
-    certificate_id = var.cert_id
-  }
+  #certificates {
+  #  certificate_id = var.cert_id
+  #}
 }
 
 resource "alicloud_alb_rule" "gl_fe_rule" {

@@ -1,6 +1,6 @@
 resource "alicloud_instance" "jobproc_ecs_instance_1" {
   instance_name        = "${var.env_name}-${var.project}-jobproc-1"
-  image_id             = data.alicloud_images.ubuntu.ids.0
+  image_id             = "m-t4ner7z7lw8rhorwqtth"
   instance_type        = "ecs.g7.large"
   security_groups      = [alicloud_security_group.jobproc-sg.id]
   vswitch_id           = module.vpc.vswitch_ids[1]
