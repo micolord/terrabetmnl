@@ -34,7 +34,7 @@ resource "alicloud_alb_listener" "default_80" {
     type = "ForwardGroup"
     forward_group_config {
       server_group_tuples {
-        server_group_id = alicloud_alb_server_group.fe_grp.id
+        server_group_id = alicloud_alb_server_group.gl_fe_grp.id
       }
     }
   }
