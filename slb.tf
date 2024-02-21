@@ -25,21 +25,6 @@ resource "alicloud_alb_load_balancer" "default" {
   }
 }
 
-resource "alicloud_alb_listener" "default_80" {
-  load_balancer_id     = alicloud_alb_load_balancer.default.id
-  listener_protocol    = "HTTP"
-  listener_port        = 80
-  listener_description = "${var.env_name}-${var.project}-80-listener"
-  default_actions {
-    type = "ForwardGroup"
-    forward_group_config {
-      server_group_tuples {
-        server_group_id = alicloud_alb_server_group.gl_fe_grp.id
-      }
-    }
-  }
-}
-
 resource "alicloud_alb_listener" "default_443" {
   load_balancer_id     = alicloud_alb_load_balancer.default.id
   listener_protocol    = "HTTPS"
@@ -137,30 +122,6 @@ resource "alicloud_alb_server_group" "gl_fe_grp" {
     server_type = "Ecs"
   }
 }
-
-resource "alicloud_alb_rule" "bo_rule" {
-  depends_on  = [alicloud_alb_listener.default_80]
-  rule_name   = "${var.env_name}-${var.project}-bo-rule"
-  listener_id = alicloud_alb_listener.default_80.id
-  priority    = "3"
-  rule_conditions {
-    type = "Host"
-    host_config {
-      values = ["tf-example-bo.com"]
-    }
-  }
-
-  rule_actions {
-    forward_group_config {
-      server_group_tuples {
-        server_group_id = alicloud_alb_server_group.bo_grp.id
-      }
-    }
-    order = "1"
-    type  = "ForwardGroup"
-  }
-}
-
 
 resource "alicloud_alb_rule" "gl_be_rule" {
   rule_name   = "${var.env_name}-${var.project}-gl-be-rule"
