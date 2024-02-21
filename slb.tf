@@ -80,7 +80,7 @@ resource "alicloud_alb_rule" "gl_fe_rule" {
   rule_actions {
     forward_group_config {
       server_group_tuples {
-        server_group_id = alicloud_alb_server_group.fe_grp.id
+        server_group_id = alicloud_alb_server_group.gl_fe_grp.id
       }
     }
     order = "1"
